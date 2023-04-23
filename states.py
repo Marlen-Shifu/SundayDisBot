@@ -9,3 +9,10 @@ class MakeClaim(StatesGroup):
     text = State()
     photo = State()
     confirm = State()
+
+
+class MakeRequest(StatesGroup):
+    type = State()
+    place = State()
+    text = State()
+    confirm = State()
