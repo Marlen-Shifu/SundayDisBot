@@ -186,7 +186,11 @@ async def report(call: CallbackQuery, state: FSMContext):
             Текст: {data.get('text')},
             Телеграм: {user_telegram}""")\
 
-        await call.bot.send_photo(ADMIN_ID, data.get('photo'))
+
+        try:
+            await call.bot.send_photo(ADMIN_ID, data.get('photo'))
+        except:
+            await call.bot.send_message(ADMIN_ID, "Нету фото")
 
         await call.bot.send_message(call.from_user.id, "Спасибо за Вашу реакцию, с Вами свяжутся, что-то еще?", reply_markup=main_menu)
 
