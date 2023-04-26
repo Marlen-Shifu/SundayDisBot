@@ -80,7 +80,8 @@ async def report(mes: Message, state: FSMContext):
 async def report(mes: Message, state: FSMContext):
     await state.update_data(text=mes.text)
 
-    type = await state.get_data('type')
+    data = await state.get_data()
+    type = data.get('type')
 
     if type == 'bar_kitchen':
 
