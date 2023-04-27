@@ -10,14 +10,11 @@ from aiogram.types import Message, CallbackQuery
 
 import phonenumbers
 
+from states import MakeClaim, MakeRequest, Menu
+
 from config import TOKEN, ADMIN_ID
 
-from utils import types_menu, places_menu, get_type_name, get_place_name
-
-# from operations import *
-#
-from states import MakeClaim
-
+from utils import types_menu, places_menu, get_type_name, get_place_name, places_list
 
 logging.basicConfig(level=logging.INFO)
 
@@ -41,18 +38,18 @@ async def start(mes: Message, state: FSMContext):
         await mes.answer(f"""Здравствуйте, {mes.from_user.first_name}!
 Вас приветствует чат-бот Sunday Coffee.
     
-Выберите то что Вас интересует.""", reply_markup=main_menu)
+Выберите заведение.""", reply_markup=places_menu)
 
     else:
         await mes.answer(f"""Здравствуйте!
 Вас приветствует чат-бот Sunday Coffee.
 
-Выберите то что Вас интересует.""", reply_markup=main_menu)
+Выберите заведение.""", reply_markup=places_menu)
 
     await mes.bot.send_message(ADMIN_ID, f"{mes.from_user.id}: {mes.from_user.username} - {mes.from_user.first_name}")
 
 
-@dp.callback_query_handler(lambda call: call.data == "info")
+@dp.callback_query_handler(lambda call: call.data == "info", state='*')
 async def info(call: CallbackQuery):
     await call.bot.send_message(call.from_user.id, """Ждем Вас в наших филиалах в городе Алматы:
     
@@ -65,12 +62,22 @@ async def info(call: CallbackQuery):
     - Медео
     
     Время работы на всех точках с 8:00 до 00:00,
-    Кроме Медео где Мы угостим Вас чашкой ароматного кофе с 8:00 до 02:00.""")
+    Кроме Медео где Мы угостим Вас чашкой ароматного кофе с 8:00 до 02:00.""", reply_markup=places_menu)
 
 
+@dp.callback_query_handler(lambda call: call.data in [place.get('callback_data') for place in places_list])
+async def info(call: CallbackQuery):
+
+    await Menu.place.set()
+
+    state = Dispatcher.get_current().current_state()
+    await state.update_data(place=call.data)
+
+    await call.bot.send_message(call.from_user.id, f"Что Вы хотите?", reply_markup=main_menu)
 
 
 if __name__ == "__main__":
     from write_report_handlers import *
     from write_request_handlers import *
+
     executor.start_polling(dp)

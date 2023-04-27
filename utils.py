@@ -38,6 +38,19 @@ for place in places_list:
     places_menu.add(types.InlineKeyboardButton(**place))
 
 
+sub_types_list = [
+    {"text": "Изменить состав", "callback_data": "compound"},
+    {"text": "Изменить подачу", "callback_data": "feeding"},
+    {"text": "Добавить пункт в меню", "callback_data": "menu"},
+    {"text": "Другое", "callback_data": "other"},
+]
+
+sub_types_menu = types.InlineKeyboardMarkup()
+
+for sub_type in sub_types_list:
+    sub_types_menu.add(types.InlineKeyboardButton(**sub_type))
+
+
 def get_type_name(data):
     return get_name(types_list, data)
 
@@ -48,6 +61,10 @@ def get_type_name_no_photo(data):
 
 def get_place_name(data):
     return get_name(places_list, data)
+
+
+def get_sub_type_name(data):
+    return get_name(sub_types_list, data)
 
 
 def get_name(list, data):
