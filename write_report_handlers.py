@@ -190,7 +190,7 @@ async def report(call: CallbackQuery, state: FSMContext):
         user_telegram = f"@{call.from_user.username}" if call.from_user.username is not None else "Недоступен"
 
 
-        await call.bot.send_message(call.from_user.id,
+        await call.bot.send_message(ADMIN_ID,
             f"""Поступила новая жалоба:
                                 Тип: {get_type_name(data.get('type'))}
                                 Заведение: {get_place_name(data.get('place'))}
