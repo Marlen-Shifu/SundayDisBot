@@ -116,12 +116,12 @@ async def report(mes: Message, state: FSMContext):
         k.add(types.InlineKeyboardButton("Да", callback_data='yes'))
 
         await mes.answer(
-                        f"""Поступила новая жалоба:
+                        f"""Подтвердите ваши данные:
                                 Тип: {get_type_name(data.get('type'))}
                                 Заведение: {get_place_name(data.get('place'))}
                                 Имя: {data.get('name')},
                                 Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""")
+                                Текст: {data.get('text')}""", reply_markup=k)
 
         await MakeClaim.confirm.set()
 
@@ -139,12 +139,12 @@ async def report(call: CallbackQuery, state: FSMContext):
         k.add(types.InlineKeyboardButton("Да", callback_data='yes'))
 
         await call.bot.send_message(call.from_user.id,
-                                    f"""Поступила новая жалоба:
+                                    f"""Подтвердите ваши данные:
                                 Тип: {get_type_name(data.get('type'))}
                                 Заведение: {get_place_name(data.get('place'))}
                                 Имя: {data.get('name')},
                                 Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""")
+                                Текст: {data.get('text')}""", reply_markup=k)
 
         await MakeClaim.confirm.set()
 
@@ -164,12 +164,12 @@ async def report(mes: Message, state: FSMContext):
         k.add(types.InlineKeyboardButton("Да", callback_data='yes'))
 
         await mes.answer(
-            f"""Поступила новая жалоба:
+            f"""Подтвердите ваши данные:
                                 Тип: {get_type_name(data.get('type'))}
                                 Заведение: {get_place_name(data.get('place'))}
                                 Имя: {data.get('name')},
                                 Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""")
+                                Текст: {data.get('text')}""", reply_markup=k)
 
         await MakeClaim.confirm.set()
 
@@ -196,7 +196,8 @@ async def report(call: CallbackQuery, state: FSMContext):
                                 Заведение: {get_place_name(data.get('place'))}
                                 Имя: {data.get('name')},
                                 Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""")
+                                Текст: {data.get('text')},
+                                Телеграм: {user_telegram}""")
 
 
         try:
