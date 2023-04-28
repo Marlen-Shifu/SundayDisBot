@@ -25,6 +25,7 @@ main_menu = types.InlineKeyboardMarkup(resize_keyboard=True)
 main_menu.add(types.InlineKeyboardButton("Информация о точках(адреса, время работы)", callback_data="info"))
 main_menu.add(types.InlineKeyboardButton("Написать жалобу", callback_data="make_claim"))
 main_menu.add(types.InlineKeyboardButton("Написать предложение или вопрос", callback_data="make_request"))
+main_menu.add(types.InlineKeyboardButton("Хочу стать партнером", callback_data="partnership"))
 
 
 @dp.message_handler(commands=['start'], state='*')
@@ -63,6 +64,11 @@ async def info(call: CallbackQuery):
     
     Время работы на всех точках с 8:00 до 00:00,
     Кроме Медео где Мы угостим Вас чашкой ароматного кофе с 8:00 до 02:00.""", reply_markup=places_menu)
+
+
+@dp.callback_query_handler(lambda call: call.data == "partnership", state='*')
+async def info(call: CallbackQuery):
+    await call.bot.send_message(call.from_user.id, """Партнерство""", reply_markup=places_menu)
 
 
 @dp.callback_query_handler(lambda call: call.data in [place.get('callback_data') for place in places_list])
