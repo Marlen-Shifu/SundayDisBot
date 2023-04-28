@@ -37,13 +37,13 @@ async def start(mes: Message, state: FSMContext):
 
     if mes.from_user.first_name is not None:
         await mes.answer(f"""Здравствуйте, {mes.from_user.first_name}!
-Вас приветствует чат-бот Sunday Coffee.
+Вас приветствует чат-бот Arabicaсoffee.
     
 Выберите заведение.""", reply_markup=places_menu)
 
     else:
         await mes.answer(f"""Здравствуйте!
-Вас приветствует чат-бот Sunday Coffee.
+Вас приветствует чат-бот Arabicaсoffee.
 
 Выберите заведение.""", reply_markup=places_menu)
 
