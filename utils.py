@@ -23,13 +23,10 @@ for type in types_list_no_photo:
     types_menu_no_photo.add(types.InlineKeyboardButton(**type))
 
 places_list = [
-    {"text": "Абая 17", "callback_data": "abay_17"},
-    {"text": "Орбита 3, 5Е", "callback_data": "orbita_3"},
-    {"text": "Тимирязева 38Б", "callback_data": "timiryazeva_38"},
-    {"text": "Жибек жолы 106", "callback_data": "zhibek_106"},
-    {"text": "Желтоксан 59 / 3", "callback_data": "zheltoksan_59"},
-    {"text": "Тимирязева 42 / 6", "callback_data": "timiryazeva_42"},
-    {"text": "Медео", "callback_data": "medeo"},
+    {"text": "17 мкр, ЖК \"Дукат\"", "callback_data": "17_dukat"},
+    {"text": "7 мкр, 8 дом", "callback_data": "7_8dom"},
+    {"text": "14 мкр, 100", "callback_data": "14_100"},
+    {"text": "16 мкр, 23/1", "callback_data": "16_23"},
 ]
 
 places_menu = types.InlineKeyboardMarkup()
