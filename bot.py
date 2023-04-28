@@ -47,11 +47,17 @@ async def start(mes: Message, state: FSMContext):
 
 Выберите заведение.""", reply_markup=places_menu)
 
-    await mes.bot.send_message(ADMIN_ID, f"{mes.from_user.id}: {mes.from_user.username}/{mes.chat.id} - {mes.from_user.first_name}")
+    # await mes.bot.send_message(ADMIN_ID, f"{mes.from_user.id}: {mes.from_user.username}/{mes.chat.id} - {mes.from_user.first_name}")
 
 
 @dp.callback_query_handler(lambda call: call.data == "info", state='*')
-async def info(call: CallbackQuery):
+async def info(call: CallbackQuery, state: FSMContext):
+
+    try:
+        await state.finish()
+    except:
+        pass
+
     await call.bot.send_message(call.from_user.id, """Ждем Вас в наших филиалах в городе Алматы:
     
     - Абая 17
@@ -67,7 +73,13 @@ async def info(call: CallbackQuery):
 
 
 @dp.callback_query_handler(lambda call: call.data == "partnership", state='*')
-async def info(call: CallbackQuery):
+async def info(call: CallbackQuery, state: FSMContext):
+
+    try:
+        await state.finish()
+    except:
+        pass
+
     await call.bot.send_message(call.from_user.id, """Партнерство""", reply_markup=places_menu)
 
 
