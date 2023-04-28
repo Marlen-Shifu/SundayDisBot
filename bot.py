@@ -83,8 +83,8 @@ async def info(call: CallbackQuery, state: FSMContext):
     await call.bot.send_message(call.from_user.id, """Партнерство""", reply_markup=places_menu)
 
 
-@dp.callback_query_handler(lambda call: call.data in [place.get('callback_data') for place in places_list])
-async def info(call: CallbackQuery):
+@dp.callback_query_handler(lambda call: call.data in [place.get('callback_data') for place in places_list], state='*')
+async def info(call: CallbackQuery, state: FSMContext):
 
     await Menu.place.set()
 
