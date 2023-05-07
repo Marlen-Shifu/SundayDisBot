@@ -58,18 +58,15 @@ async def info(call: CallbackQuery, state: FSMContext):
     except:
         pass
 
-    await call.bot.send_message(call.from_user.id, """Ждем Вас в наших филиалах в городе Алматы:
+    await call.bot.send_message(call.from_user.id, """Ждем Вас в наших филиалах в городе Актау:
     
-    - Абая 17
-    - Орбита 3, 5Е
-    - Тимирязева 38Б
-    - Жибек жолы 106
-    - Желтоксан 59/3
-    - Тимирязева 42/6
-    - Медео
+    - 17 мкр, ЖК \"Дукат\"
+    - 7 мкр, 8 дом
+    - 14 мкр, 100
+    - 16 мкр, 23/1
     
-    Время работы на всех точках с 8:00 до 00:00,
-    Кроме Медео где Мы угостим Вас чашкой ароматного кофе с 8:00 до 02:00.""", reply_markup=places_menu)
+    Время работы на всех точках с 8:00 до 02:00.
+    Приятного аппетита!""", reply_markup=places_menu)
 
 
 @dp.callback_query_handler(lambda call: call.data == "partnership", state='*')
