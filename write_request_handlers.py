@@ -34,14 +34,14 @@ async def report(call: CallbackQuery, state: FSMContext):
     await state.update_data(type=call.data)
 
     if call.data == 'bar_kitchen':
-        await call.bot.send_message(call.from_user.id, f"Опишите Ваше предложение")
-        await MakeRequest.text.set()
 
-    else:
         await call.bot.send_message(call.from_user.id, """Что именно вы хотите?""", reply_markup=sub_types_menu)
 
         await MakeRequest.sub_type.set()
+    else:
 
+        await call.bot.send_message(call.from_user.id, f"Опишите Ваше предложение")
+        await MakeRequest.text.set()
 
 @dp.callback_query_handler(state=MakeRequest.sub_type)
 async def request(call: CallbackQuery, state: FSMContext):
