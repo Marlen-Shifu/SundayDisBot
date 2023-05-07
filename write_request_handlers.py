@@ -33,7 +33,7 @@ async def request(call: CallbackQuery, state: FSMContext):
 async def report(call: CallbackQuery, state: FSMContext):
     await state.update_data(type=call.data)
 
-    if call.data == 'service':
+    if call.data == 'bar_kitchen':
         await call.bot.send_message(call.from_user.id, f"Опишите Ваше предложение")
         await MakeRequest.text.set()
 
@@ -61,12 +61,22 @@ async def request(mes: Message, state: FSMContext):
     k.add(types.InlineKeyboardButton("Нет", callback_data='no'))
     k.add(types.InlineKeyboardButton("Да", callback_data='yes'))
 
-    await mes.answer(
-            f"""Подтвердите ваши данные:
-            Тип: {get_type_name_no_photo(data.get('type'))}
-            Пункт: {get_sub_type_name(data.get('sub_type'))}
-            Заведение: {get_place_name(data.get('place'))}
-            Текст: {data.get('text')}""", reply_markup=k)
+    if data.get('sub_type') is None:
+
+        await mes.answer(
+                f"""Подтвердите ваши данные:
+        Тип: {get_type_name_no_photo(data.get('type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Текст: {data.get('text')}""", reply_markup=k)
+
+    else:
+        await mes.answer(
+                f"""Подтвердите ваши данные:
+        Тип: {get_type_name_no_photo(data.get('type'))}
+        Пункт: {get_sub_type_name(data.get('sub_type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Текст: {data.get('text')}""", reply_markup=k)
+
 
     await MakeRequest.confirm.set()
 
@@ -80,12 +90,21 @@ async def request(call: CallbackQuery, state: FSMContext):
 
         data = await state.get_data()
 
-        await call.bot.send_message(ADMIN_ID,
-            f"""Новое предложение:
-            Заведение: {get_place_name(data.get('place'))}
-            Тип: {get_type_name_no_photo(data.get('type'))}
-            Пункт: {get_sub_type_name(data.get('sub_type'))}
-            Текст: {data.get('text')}""")\
+        if data.get('sub_type') is None:
+
+            await call.bot.send_message(ADMIN_ID,
+                f"""Новое предложение:
+        Тип: {get_type_name_no_photo(data.get('type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Текст: {data.get('text')}""")
+
+        else:
+            await call.bot.send_message(ADMIN_ID,
+                f"""Новое предложение:
+        Тип: {get_type_name_no_photo(data.get('type'))}
+        Пункт: {get_sub_type_name(data.get('sub_type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Текст: {data.get('text')}""")
 
 
         await call.bot.send_message(call.from_user.id, "Спасибо за Ваше предложение, оно очень важно нам, что-то еще?", reply_markup=places_menu)

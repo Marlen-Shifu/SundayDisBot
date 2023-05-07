@@ -117,11 +117,11 @@ async def report(mes: Message, state: FSMContext):
 
         await mes.answer(
                         f"""Подтвердите ваши данные:
-                                Тип: {get_type_name(data.get('type'))}
-                                Заведение: {get_place_name(data.get('place'))}
-                                Имя: {data.get('name')},
-                                Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""", reply_markup=k)
+        Тип: {get_type_name(data.get('type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Имя: {data.get('name')},
+        Телефон: {data.get('phone')},
+        Текст: {data.get('text')}""", reply_markup=k)
 
         await MakeClaim.confirm.set()
 
@@ -140,11 +140,11 @@ async def report(call: CallbackQuery, state: FSMContext):
 
         await call.bot.send_message(call.from_user.id,
                                     f"""Подтвердите ваши данные:
-                                Тип: {get_type_name(data.get('type'))}
-                                Заведение: {get_place_name(data.get('place'))}
-                                Имя: {data.get('name')},
-                                Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""", reply_markup=k)
+        Тип: {get_type_name(data.get('type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Имя: {data.get('name')},
+        Телефон: {data.get('phone')},
+        Текст: {data.get('text')}""", reply_markup=k)
 
         await MakeClaim.confirm.set()
 
@@ -165,11 +165,11 @@ async def report(mes: Message, state: FSMContext):
 
         await mes.answer(
             f"""Подтвердите ваши данные:
-                                Тип: {get_type_name(data.get('type'))}
-                                Заведение: {get_place_name(data.get('place'))}
-                                Имя: {data.get('name')},
-                                Телефон: {data.get('phone')},
-                                Текст: {data.get('text')}""", reply_markup=k)
+        Тип: {get_type_name(data.get('type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Имя: {data.get('name')},
+        Телефон: {data.get('phone')},
+        Текст: {data.get('text')}""", reply_markup=k)
 
         await MakeClaim.confirm.set()
 
@@ -192,12 +192,12 @@ async def report(call: CallbackQuery, state: FSMContext):
 
         await call.bot.send_message(ADMIN_ID,
             f"""Поступила новая жалоба:
-                                Тип: {get_type_name(data.get('type'))}
-                                Заведение: {get_place_name(data.get('place'))}
-                                Имя: {data.get('name')},
-                                Телефон: {data.get('phone')},
-                                Текст: {data.get('text')},
-                                Телеграм: {user_telegram}""")
+        Тип: {get_type_name(data.get('type'))}
+        Заведение: {get_place_name(data.get('place'))}
+        Имя: {data.get('name')},
+        Телефон: {data.get('phone')},
+        Текст: {data.get('text')},
+        Телеграм: {user_telegram}""")
 
 
         try:
